@@ -23,13 +23,16 @@ function App() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         const savedUser = await response.json();
@@ -51,7 +54,9 @@ function App() {
 
   const fetchAllUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/users");
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users`
+      );
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
